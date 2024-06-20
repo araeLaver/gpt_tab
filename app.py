@@ -25,12 +25,16 @@ def get_chatbot_response(user_input):
     response = client.chat.completions.create(
         model="gpt-4o",
         messages=[
-            {"role": "system", "content": "나의 프롬프트 엔지니어링 코치가 되어줘."},
-            {"role": "user", "content": "어떻게 하면 프롬프트 엔지니어링을 잘 할수 있을까?"}
+            # {"role": "system", "content": "나의 프롬프트 엔지니어링 코치가 되어줘."},
+            # {"role": "user", "content": "어떻게 하면 프롬프트 엔지니어링을 잘 할수 있을까?"}
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_input}
         ]
     )
 
+    print(response.choices[0].message)
     return response.choices[0].message.content
+    # return response.choices[0].message["content"]
 
 # Input field for the user
 user_input = st.text_input("메시지를 입력하세요")
